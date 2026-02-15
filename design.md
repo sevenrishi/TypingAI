@@ -141,17 +141,3 @@ In-memory object keyed by room code:
 - `VITE_API_URL`
 - `VITE_GOOGLE_CLIENT_ID`
 
-## 10. Current Design Risks and Gaps
-- DG-1: Progress/streak endpoints used by frontend are missing in backend (`/users/progress`, `/users/learning`, `/users/streak/record`).
-- DG-2: Room storage is in-memory only; horizontal scaling is not supported.
-- DG-3: Typing test currently writes both session and result models (possible duplication).
-- DG-4: CORS config is currently permissive (`origin: '*'`) in backend and Socket.IO.
-- DG-5: Secrets are present in `.env`; operational security needs hardening.
-
-## 11. Recommended Next Design Iterations
-- Add backend progress/streak module with persistent schema and routes.
-- Unify result persistence strategy (choose `Session` only or formal dual-write policy).
-- Introduce Redis-backed Socket.IO adapter for scalable rooms.
-- Add request validation layer (zod/joi) and rate limiting on auth endpoints.
-- Tighten production CORS and secret management.
-- Add integration tests for auth, session stats, and socket race lifecycle.
